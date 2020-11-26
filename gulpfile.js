@@ -527,6 +527,8 @@ gulp.task("buildnumber", function(done) {
 
     var version = config.versionPrefix + buildNumber;
 
+    console.log(version);
+
     exec('git log --format="%h" -n 1', function(err, stdout, stderr) {
       var buildCommit = "";
       if (!err) {
