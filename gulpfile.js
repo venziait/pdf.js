@@ -41,6 +41,8 @@ var webpackStream = require("webpack-stream");
 var Vinyl = require("vinyl");
 var vfs = require("vinyl-fs");
 var through = require("through2");
+var uglify = require('gulp-uglify');
+var pipeline = require('readable-stream').pipeline;
 
 var BUILD_DIR = "build/";
 var L10N_DIR = "l10n/";
@@ -1999,3 +2001,11 @@ gulp.task(
     "lint-chromium"
   )
 );
+
+gulp.task("minify", function() {
+  return pipeline(
+        gulp.src('pdfjs-dist/build/pdf.worker.js'),
+        uglify(),
+        gulp.dest('pdfjs-dist/build')
+  );
+});
